@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library</title>
+    <link rel="stylesheet" href="resources/css/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Zilla+Slab:wght@300&display=swap"
+        rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <h1>Librology</h1>
+        <h5 style = "color: white">Keep up to date with your books</h5>
+    </nav>
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="input-label">
+                    <p class = 'input-label'>Book</p>
+                    <input type="text" name="book" id="book">
+                </div>
+                <div class="input-label">
+                    <p class='input-label'>Author</p>
+                    <input type="text" name="author" id="author">
+                </div>
+                <div class="input-label">
+                    <p class='input-label'>Pages</p>
+                    <input type="number" name="pages" id="pages" required>
+                </div>
+                <div class="input-label">
+                    <p class='input-label'>Status</p>
+                    <select name="status">
+                        <option value="Read">Read</option>
+                        <option value="Not Read">Not Read</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button id="submit">SUBMIT</button>
+            </div>
+        </form>
+    </div>
+    <div class="book-row" id = "headers">
+        <div class="book-des">
+            <p>Book</p>
+        </div>
+        <div class="book-des">
+            <p>Author</p>
+        </div>
+        <div class="book-des">
+            <p>Pages</p>
+        </div>
+        <div class="book-des">
+            <p>Status</p>
+        </div>
+        <div class="book-des">
+        </div>
+    </div>
+    <p id="line"></p>
+    <div class="edit-container">
+        <div class = "edit-header">
+        <h1 style = "text-align: center;">Edit</h1>
+            <span class = "close">&times;</span>
+        </div>
+        <div class="input-label">
+            <p class="input-label">Book</p>
+            <input type="text"id="edit-book">
+        </div>
+        <div class="input-label">
+            <p class='input-label'>Author</p>
+            <input type="text"id="edit-author">
+        </div>
+        <div class="input-label">
+            <p class='input-label'>Pages</p>
+            <input type="number" id = "edit-pages">
+        </div>
+        <div class="input-label">
+            <p class='input-label'>Status</p>
+            <select name="status" id = "edit-select">
+                <option value="Read">Read</option>
+                <option value="Not Read">Not Read</option>
+            </select>
+        </div>
+    </div>
+</body>
+<script src="resources/javascript/app.js"></script>
+</html>
