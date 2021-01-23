@@ -9,7 +9,7 @@ const submit = document.querySelector('#submit');
 
 let library = [];
 
-//constructor
+//Book Constructor
 function Book(title, author, pages, read){
     this.title = title;
     this.author = author;
@@ -17,24 +17,28 @@ function Book(title, author, pages, read){
     this.read = read;
 }
 
+//Pop up for edit container
 closeContainer.addEventListener('click', () => edit.style.cssText = "display: none;");
+
+//add book object to library array on submit
 submit.addEventListener('click', e => {
     e.preventDefault();
     addBookToLibrary();
-
-    console.log(library);
 }); 
 
+//push a new book object into the array depending on the user's input
 function addBookToLibrary(){ 
    const book = new Book(bookTitle.value, author.value, pages.value, select.value);
    library.push(book);
-   displayBook(book);
-
-    bookTitle.value = "";
-    author.value = "";
-    pages.value = "";
+   displayBook(book); 
+   
+   //reset the input values
+   bookTitle.value = "";
+   author.value = "";
+   pages.value = "";
 }
 
+//create the necessary divs to properly display each book to the page
 function displayBook(book){
     const bookRowDiv = document.createElement('div');
     bookRowDiv.classList.add('book-row');
@@ -64,6 +68,7 @@ function displayBook(book){
     const buttonContainer = document.createElement('div')
     buttonContainer.classList.add('book-des');
 
+    //append the edit and delete buttons to the row
     const editButton = document.createElement('button');
     editButton.id = 'edit';
     editButton.textContent = 'EDIT';
@@ -76,10 +81,17 @@ function displayBook(book){
 
     bookRowDiv.appendChild(buttonContainer);
 
+    //FOR RESPONSIVE DESIGN -- INSTEAD OF DELETE AND EDIT, RENDER AN ICON TO THE BUTTONS
+    const mq = window.matchMedia("(max-width: 698px)");
+    mq.addListener(WidthChange(mq, deleteButton, editButton));
+    
+
+    //remove the book div on delete
     deleteButton.addEventListener('click', e =>{
         bookRowDiv.remove();
     });
 
+    //the edit input will be populated based on the row's value
     const editTitle = document.querySelector('#edit-book');
     const editAuthor = document.querySelector('#edit-author');
     const editPages = document.querySelector('#edit-pages');
@@ -91,6 +103,7 @@ function displayBook(book){
         editPages.value = bookPages.textContent;
         editStatus.value = bookStatus.textContent;
 
+        //display the edit container to the screen and add a button to it
         edit.style.cssText = 'display: block';
         const submitContainer = document.createElement('div');
         const submitButton = document.createElement('button');
@@ -100,6 +113,7 @@ function displayBook(book){
         submitContainer.appendChild(submitButton);
         edit.appendChild(submitContainer);
 
+        //if 'UPDATE' is clicked, change the textContent of row based on the input's value
         submitButton.addEventListener('click', e =>{
             bookTitle2.textContent = editTitle.value;
             bookAuthor.textContent = editAuthor.value;
@@ -109,8 +123,23 @@ function displayBook(book){
             submitContainer.remove();
         });
 
+        //remove the button when the edit container is exited without Update
         closeContainer.addEventListener('click', e =>{
             submitContainer.remove();
         });
     });
+}
+
+//Reponsive function based on screen size.
+function WidthChange(mq, deleteButton, editButton){
+    if(mq.matches){
+        deleteButton.textContent = '';
+        editButton.textContent = '';
+        deleteButton.innerHTML = '<span class="material-icons">delete</span >'
+        editButton.innerHTML = '<span class="material-icons">edit</span>'
+    }
+    else{
+        deleteButton.textContent = 'DELETE';
+        editButton.textContent = 'EDIT';
+    }
 }
